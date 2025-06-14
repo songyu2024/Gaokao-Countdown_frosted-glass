@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高考倒计时</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* 内联样式以确保最高优先级 */
+    body, html {
+      pointer-events: auto !important;
+    }
+    .interactive-element {
+      pointer-events: auto !important;
+      cursor: pointer !important;
+      position: relative;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <!-- 使用iframe可能可以绕过某些桌面事件拦截 -->
+  <div style="position:fixed; width:100%; height:100%; z-index:10000; pointer-events:none;">
+    <div class="container">
+      <img id="bg" src="https://t.alcy.cc/fj" alt="背景图">
+      
+      <!-- 添加interactive-element类以强制启用点击 -->
+      <div class="weather-card interactive-element">
+        <div class="weather-type" id="weather-type">获取中...</div>
+        <div class="weather-temp" id="weather-temp">--°C/--°C</div>
+      </div>
+      
+      <div class="glass-card interactive-element">
+        <h1 class="title">距离 2026 高考</h1>
+        <div class="countdown" id="countdown">
+          <span id="days" class="num">000</span><span class="label">D</span>
+          <span id="hours" class="num">00</span><span class="label">h</span>
+          <span id="minutes" class="num">00</span><span class="label">min</span>
+          <span id="seconds" class="num">00</span><span class="label">s</span>
+        </div>
+      </div>
+      
+      <div class="quote-card interactive-element">
+        <div class="quote" id="quote">加载中...</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
