@@ -190,7 +190,7 @@ setInterval(loadHitokoto, 2 * 60 * 1000);
 
 如有问题或建议，请通过以下方式联系：
 - 提交 GitHub Issue
-- [添加你的联系方式]
+- songyu00yo@gmail.com
 
 ---
 
