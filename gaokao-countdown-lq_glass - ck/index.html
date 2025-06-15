@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高考倒计时</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <img id="bg" src="img/bg.jpg" alt="Background">
+    
+    <div class="container">
+        <!-- 天气卡片 -->
+        <div class="liquidGlass-wrapper weather-card">
+            <div class="liquidGlass-effect"></div>
+            <div class="liquidGlass-tint"></div>
+            <div class="liquidGlass-shine"></div>
+            <div class="liquidGlass-text">
+                <div id="weather" class="weather-content">
+                    <div id="weather-type" class="weather-type">晴</div>
+                    <div id="weather-temp" class="weather-temp">25°C</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 高考倒计时卡片 -->
+        <div class="liquidGlass-wrapper glass-card">
+            <div class="liquidGlass-effect"></div>
+            <div class="liquidGlass-tint"></div>
+            <div class="liquidGlass-shine"></div>
+            <div class="liquidGlass-text">
+                <div class="card-content">
+                    <div class="title">高考倒计时</div>
+                    <div class="countdown">
+                        <span class="num" id="days">000</span>
+                        <span class="label">D</span>
+                        <span class="num" id="hours">00</span>
+                        <span class="label">H</span>
+                        <span class="num" id="minutes">00</span>
+                        <span class="label">MIN</span>
+                        <span class="num" id="seconds">00</span>
+                        <span class="label">S</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 一言卡片 -->
+        <div class="liquidGlass-wrapper quote-card">
+            <div class="liquidGlass-effect"></div>
+            <div class="liquidGlass-tint"></div>
+            <div class="liquidGlass-shine"></div>  
+            <div class="liquidGlass-text">
+                <div id="quote" class="quote">加载中...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SVG滤镜 -->
+    <svg class="hidden-svg">
+        <filter
+            id="glass-distortion"
+            x="0%"
+            y="0%"
+            width="100%"
+            height="100%"
+            filterUnits="objectBoundingBox"
+        >
+            <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.01 0.01"
+                numOctaves="1"
+                seed="5"
+                result="turbulence"
+            />
+
+            <feComponentTransfer in="turbulence" result="mapped">
+                <feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5" />
+                <feFuncG type="gamma" amplitude="0" exponent="1" offset="0" />
+                <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5" />
+            </feComponentTransfer>
+
+            <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap" />
+
+            <feSpecularLighting  
+                in="softMap"
+                surfaceScale="5"
+                specularConstant="1"
+                specularExponent="100"
+                lighting-color="white"
+                result="specLight"
+            >
+                <fePointLight x="-200" y="-200" z="300" />
+            </feSpecularLighting>
+
+            <feComposite
+                in="specLight"
+                operator="arithmetic"
+                k1="0"
+                k2="1"
+                k3="1"
+                k4="0"
+                result="litImage"
+            />
+
+            <feDisplacementMap
+                in="SourceGraphic"
+                in2="softMap"
+                scale="150"
+                xChannelSelector="R"
+                yChannelSelector="G"
+            />
+        </filter>
+    </svg>
+
+    <script src="script.js"></script>
+</body>
+</html>
